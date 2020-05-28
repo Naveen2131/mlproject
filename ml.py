@@ -11,7 +11,7 @@ from keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Flatten
 from keras.utils import np_utils
 import os
 
-def trained_model():
+def trained_model(n):
     # loading the dataset
     (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 
@@ -52,6 +52,11 @@ def trained_model():
     model.add(MaxPool2D(pool_size=(2,2)))
     model.add(Dropout(0.25))
     
+    if n>1:
+        # convolutional layer
+        model.add(Conv2D(300, kernel_size=(3,3), strides=(1,1), padding='same', activation='relu'))
+        model.add(MaxPool2D(pool_size=(2,2)))
+    
     # flatten output of conv
     model.add(Flatten())
     
@@ -68,10 +73,10 @@ def trained_model():
     # compiling the sequential model
     model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
     
-    # training the model for 12 epochs
+    # training the model for 20 epochs
     history = model.fit(X_train, Y_train,
               batch_size=128,
-              epochs=12,
+              epochs=20,
               validation_data=(X_test, Y_test))
     
     
@@ -80,8 +85,8 @@ def trained_model():
     model.save("MY_CIFAR10_AlexNet.h5")
     os.system("mv /MY_CIFAR10_AlexNet.h5/project")
     return a
-
-accuracy_trained_model=trained_model()
+no_layer=1
+accuracy_trained_model=trained_model(no_layer)
 f = open("accuracy.txt","w+")
 f.write(str(accuracy_trained_model))
 f.close()
