@@ -30,7 +30,6 @@ def larger_model():
     model.add(Conv2D(30, (5, 5), input_shape=(28, 28, 1), activation='relu'))
     model.add(MaxPooling2D())
     model.add(Conv2D(15, (3, 3), activation='relu'))
-    #model.add(Conv2D(15, (3, 3), activation='relu'))
     model.add(MaxPooling2D())
 
 
