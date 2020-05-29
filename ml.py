@@ -56,5 +56,5 @@ acc=scores[1]*100
 file=open("accuracy.txt",'w')
 file.write(str(acc))
 file.close()
-os.system(mv /accuracy.txt/project)
+#os.system(mv /accuracy.txt/project)
 
